@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@layer theme {
+  :root {
+    --color-primary: #0066CC;
+    --color-dark: #2C2C2C;
+    --color-light-gray: #F5F5F7;
+    --color-warm-white: #FAFAFA;
+    --color-accent-orange: #FF7A30;
+    --color-accent-green: #00B894;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-[#FAFAFA] text-[#2C2C2C];
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', sans-serif;
+  }
+
+  h1 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  h4 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+}

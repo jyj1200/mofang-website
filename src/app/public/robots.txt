@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Google爬虫
+User-agent: Googlebot
+Allow: /
+
+# 主要页面
+Sitemap: /sitemap.xml
