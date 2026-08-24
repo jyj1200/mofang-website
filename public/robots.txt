@@ -5,5 +5,9 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
+# 百度爬虫
+User-agent: Baiduspider
+Allow: /
+
 # 主要页面
 Sitemap: https://soehk.com/sitemap.xml
