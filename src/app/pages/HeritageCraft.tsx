@@ -945,6 +945,18 @@ export function HeritageCraft() {
             {t.quoteNote}
           </p>
         </motion.div>
+
+        {/* ── Bottom contact note ── */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mt-10 text-center text-sm tracking-wider"
+          style={{ color: '#5a7a96' }}
+        >
+          {t.bottomContact}
+        </motion.p>
       </main>
     </div>
   );
