@@ -4,8 +4,14 @@ import { CheckCircle, Lightbulb, FileText, Cpu, Package, BarChart, Loader2 } fro
 import { PageEnding } from '../components/PageEnding';
 import { SEOHead } from '../components/SEOHead';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../locales/translations';
 
 export function IndustrialOrder() {
+  const { language } = useLanguage();
+  const isZh = language === 'zh';
+  const t = translations[language].indOrder;
+
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -61,12 +67,12 @@ export function IndustrialOrder() {
         });
       } else {
         setSubmitStatus('error');
-        setStatusMessage(result.error || '提交失败，请稍后重试');
+        setStatusMessage(result.error || t.errorFallback);
         console.error('Submit error:', result);
       }
     } catch (error) {
       setSubmitStatus('error');
-      setStatusMessage('网络错误，请检查连接后重试');
+      setStatusMessage(t.networkError);
       console.error('Network error:', error);
     } finally {
       setIsSubmitting(false);
@@ -85,30 +91,42 @@ export function IndustrialOrder() {
   const servicePackages = [
     {
       name: '概念设计',
+      nameEn: 'Concept Design',
       icon: <Lightbulb size={32} />,
       description: '产品创意构思与概念方案',
+      descriptionEn: 'Product ideation and concept development',
       includes: ['需求分析', '竞品调研', '概念草图', '3D建模', '渲染效果图'],
+      includesEn: ['Requirement analysis', 'Competitive research', 'Concept sketches', '3D modeling', 'Photorealistic rendering'],
       color: '#0066CC',
     },
     {
       name: '结构设计',
+      nameEn: 'Structural Design',
       icon: <FileText size={32} />,
       description: '详细的机械结构设计',
+      descriptionEn: 'Detailed mechanical structure design',
       includes: ['结构设计', '工程图纸', 'BOM单', '结构分析', '设计修改'],
+      includesEn: ['Structure design', 'Engineering drawings', 'BOM list', 'Structural analysis', 'Design revisions'],
       color: '#00B894',
     },
     {
       name: '样机支持',
+      nameEn: 'Prototyping Support',
       icon: <Package size={32} />,
       description: '原型样机制作',
+      descriptionEn: 'Prototype and mockup fabrication',
       includes: ['3D打印', '手板制作', '优化迭代', '认证辅导'],
+      includesEn: ['3D printing', 'Mockup fabrication', 'Iterative optimization', 'Certification guidance'],
       color: '#FF7A30',
     },
     {
       name: '生产对接',
+      nameEn: 'Production Handover',
       icon: <Cpu size={32} />,
       description: '生产工艺与供应链对接',
+      descriptionEn: 'Manufacturing process and supply chain coordination',
       includes: ['供应商对接', '工艺优化', '质量把控', '小批量试产', '技术支持'],
+      includesEn: ['Supplier coordination', 'Process optimization', 'Quality control', 'Small-batch trial production', 'Technical support'],
       color: '#0066CC',
     },
   ];
@@ -117,32 +135,44 @@ export function IndustrialOrder() {
     {
       step: 1,
       title: '需求对接',
+      titleEn: 'Requirement Alignment',
       description: '深入了解产品需求与技术指标',
+      descriptionEn: 'Understanding your product needs and technical specifications',
     },
     {
       step: 2,
       title: '方案设计',
+      titleEn: 'Solution Design',
       description: '提供多套设计方案与技术评估',
+      descriptionEn: 'Multiple design options with technical evaluation',
     },
     {
       step: 3,
       title: '详细设计',
+      titleEn: 'Detailed Design',
       description: '完成结构设计与工程图纸',
+      descriptionEn: 'Completing structure design and engineering drawings',
     },
     {
       step: 4,
       title: '样机验证',
+      titleEn: 'Prototyping',
       description: '制作样机并测试',
+      descriptionEn: 'Building and testing prototypes',
     },
     {
       step: 5,
       title: '优化迭代',
+      titleEn: 'Optimization',
       description: '根据测试结果优化设计',
+      descriptionEn: 'Refining the design based on test results',
     },
     {
       step: 6,
       title: '交付支持',
+      titleEn: 'Delivery Support',
       description: '提供技术文档与生产支持',
+      descriptionEn: 'Providing documentation and production support',
     },
   ];
 
@@ -150,31 +180,39 @@ export function IndustrialOrder() {
     {
       icon: <BarChart size={24} />,
       title: '仿真分析',
+      titleEn: 'Simulation Analysis',
       description: '结构强度、流体、热学等多物理场仿真',
+      descriptionEn: 'Structural, fluid, thermal and other multi-physics simulation',
     },
     {
       icon: <Cpu size={24} />,
       title: '工艺优化',
+      titleEn: 'Process Optimization',
       description: '降低制造成本，提高良品率',
+      descriptionEn: 'Reducing manufacturing cost and improving yield',
     },
     {
       icon: <FileText size={24} />,
       title: '全套项目设计',
+      titleEn: 'Full Project Design',
       description: '3D建模、效果图渲染、结构机械设计',
+      descriptionEn: '3D modeling, rendering, structural and mechanical design',
     },
     {
       icon: <Package size={24} />,
       title: '供应链支持',
+      titleEn: 'Supply Chain Support',
       description: '对接优质供应商资源，保障项目进度',
+      descriptionEn: 'Coordinating quality suppliers to keep projects on schedule',
     },
   ];
 
   return (
     <div className="min-h-screen">
-      <SEOHead 
-        title="工业设计服务 - 墨方智能科技"
-        description="墨方智能科技工业设计服务，提供从概念到生产的全流程技术支持，包括概念设计、结构设计、样机制作、生产对接等专业服务。"
-        keywords="工业设计服务,产品设计,结构设计,样机制作,机械设计,机电设计,中山工业设计"
+      <SEOHead
+        title={t.metaTitle}
+        description={t.metaDesc}
+        keywords={t.metaKeywords}
         path="/industrial-order"
       />
       {/* Hero Section */}
@@ -186,7 +224,7 @@ export function IndustrialOrder() {
             transition={{ duration: 0.6 }}
             className="mb-4 text-white"
           >
-            工业设计服务
+            {t.heroTitle}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -194,7 +232,7 @@ export function IndustrialOrder() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl"
           >
-            从概念到落地的全流工业设计解决方案
+            {t.heroSubtitle}
           </motion.p>
         </div>
       </section>
@@ -209,9 +247,9 @@ export function IndustrialOrder() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="mb-4">服务套餐</h2>
+            <h2 className="mb-4">{t.pkgTitle}</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              灵活的服务组合，满足不同阶段的产品开发需求
+              {t.pkgDesc}
             </p>
           </motion.div>
 
@@ -231,10 +269,10 @@ export function IndustrialOrder() {
                 >
                   <div style={{ color: pkg.color }}>{pkg.icon}</div>
                 </div>
-                <h4 className="mb-2">{pkg.name}</h4>
-                <p className="text-gray-600 text-sm mb-4">{pkg.description}</p>
+                <h4 className="mb-2">{isZh ? pkg.name : pkg.nameEn}</h4>
+                <p className="text-gray-600 text-sm mb-4">{isZh ? pkg.description : pkg.descriptionEn}</p>
                 <ul className="space-y-2">
-                  {pkg.includes.map((item, i) => (
+                  {(isZh ? pkg.includes : pkg.includesEn).map((item, i) => (
                     <li key={i} className="flex items-center text-sm text-gray-600">
                       <CheckCircle
                         size={16}
@@ -261,9 +299,9 @@ export function IndustrialOrder() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="mb-4">服务流程</h2>
+            <h2 className="mb-4">{t.processTitle}</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              标准化的项目流程，确保高质量交付
+              {t.processDesc}
             </p>
           </motion.div>
 
@@ -281,8 +319,8 @@ export function IndustrialOrder() {
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0066CC] to-[#00B894] text-white flex items-center justify-center mb-4 relative z-10">
                     <span className="text-lg">{step.step}</span>
                   </div>
-                  <h4 className="mb-2">{step.title}</h4>
-                  <p className="text-gray-600 text-sm">{step.description}</p>
+                  <h4 className="mb-2">{isZh ? step.title : step.titleEn}</h4>
+                  <p className="text-gray-600 text-sm">{isZh ? step.description : step.descriptionEn}</p>
                 </motion.div>
               ))}
             </div>
@@ -300,9 +338,9 @@ export function IndustrialOrder() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="mb-4">技术支持能力</h2>
+            <h2 className="mb-4">{t.techTitle}</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              专业的技术团队为您的产品保驾护航
+              {t.techDesc}
             </p>
           </motion.div>
 
@@ -319,8 +357,8 @@ export function IndustrialOrder() {
                 <div className="w-16 h-16 rounded-full bg-[#0066CC]/10 text-[#0066CC] flex items-center justify-center mx-auto mb-4">
                   {item.icon}
                 </div>
-                <h4 className="mb-2">{item.title}</h4>
-                <p className="text-gray-600 text-sm">{item.description}</p>
+                <h4 className="mb-2">{isZh ? item.title : item.titleEn}</h4>
+                <p className="text-gray-600 text-sm">{isZh ? item.description : item.descriptionEn}</p>
               </motion.div>
             ))}
           </div>
@@ -337,9 +375,9 @@ export function IndustrialOrder() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="mb-4">项目咨询</h2>
+            <h2 className="mb-4">{t.formTitle}</h2>
             <p className="text-gray-600">
-              填写您的项目需求，我们将为您量身定制解决方案
+              {t.formDesc}
             </p>
           </motion.div>
 
@@ -353,7 +391,7 @@ export function IndustrialOrder() {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
-                <label className="block text-sm mb-2">姓名 *</label>
+                <label className="block text-sm mb-2">{t.fieldName}</label>
                 <input
                   type="text"
                   name="name"
@@ -361,11 +399,11 @@ export function IndustrialOrder() {
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
-                  placeholder="请输入您的姓名"
+                  placeholder={t.namePlaceholder}
                 />
               </div>
               <div>
-                <label className="block text-sm mb-2">企业名称 *</label>
+                <label className="block text-sm mb-2">{t.fieldCompany}</label>
                 <input
                   type="text"
                   name="company"
@@ -373,14 +411,14 @@ export function IndustrialOrder() {
                   value={formData.company}
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
-                  placeholder="请输入企业名称"
+                  placeholder={t.companyPlaceholder}
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
-                <label className="block text-sm mb-2">所属行业 *</label>
+                <label className="block text-sm mb-2">{t.fieldIndustry}</label>
                 <select
                   name="industry"
                   required
@@ -388,16 +426,16 @@ export function IndustrialOrder() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
                 >
-                  <option value="">请选择</option>
-                  <option value="智能硬件">智能硬件</option>
-                  <option value="机械设备">机械设备</option>
-                  <option value="消费电子">消费电子</option>
-                  <option value="医疗器械">医疗器械</option>
-                  <option value="其他">其他</option>
+                  <option value="">{t.selectPlaceholder}</option>
+                  <option value="智能硬件">{t.indSmartHardware}</option>
+                  <option value="机械设备">{t.indMachinery}</option>
+                  <option value="消费电子">{t.indConsumer}</option>
+                  <option value="医疗器械">{t.indMedical}</option>
+                  <option value="其他">{t.indOther}</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm mb-2">联系电话 *</label>
+                <label className="block text-sm mb-2">{t.fieldPhone}</label>
                 <input
                   type="tel"
                   name="phone"
@@ -405,26 +443,26 @@ export function IndustrialOrder() {
                   value={formData.phone}
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
-                  placeholder="请输入联系电话"
+                  placeholder={t.phonePlaceholder}
                 />
               </div>
             </div>
 
             <div className="mb-6">
-              <label className="block text-sm mb-2">电子邮箱</label>
+              <label className="block text-sm mb-2">{t.fieldEmail}</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
-                placeholder="请输入电子邮箱"
+                placeholder={t.emailPlaceholder}
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
-                <label className="block text-sm mb-2">产品类型 *</label>
+                <label className="block text-sm mb-2">{t.fieldProductType}</label>
                 <input
                   type="text"
                   name="productType"
@@ -432,62 +470,62 @@ export function IndustrialOrder() {
                   value={formData.productType}
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
-                  placeholder="例如：智能穿戴设备"
+                  placeholder={t.productTypePlaceholder}
                 />
               </div>
               <div>
-                <label className="block text-sm mb-2">项目阶段</label>
+                <label className="block text-sm mb-2">{t.fieldStage}</label>
                 <select
                   name="projectStage"
                   value={formData.projectStage}
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
                 >
-                  <option value="">请选择</option>
-                  <option value="概念阶段">概念阶段</option>
-                  <option value="详细设计">详细设计</option>
-                  <option value="样机制作">样机制作</option>
-                  <option value="量产准备">量准备</option>
+                  <option value="">{t.selectPlaceholder}</option>
+                  <option value="概念阶段">{t.stageConcept}</option>
+                  <option value="详细设计">{t.stageDetail}</option>
+                  <option value="样机制作">{t.stagePrototype}</option>
+                  <option value="量产准备">{t.stageProduction}</option>
                 </select>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
-                <label className="block text-sm mb-2">项目周期</label>
+                <label className="block text-sm mb-2">{t.fieldTimeline}</label>
                 <select
                   name="timeline"
                   value={formData.timeline}
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
                 >
-                  <option value="">请选择</option>
-                  <option value="1-3个月">1-3个月</option>
-                  <option value="3-6个月">3-6个月</option>
-                  <option value="6-12个月">6-12个月</option>
-                  <option value="12个月以上">12个月以上</option>
+                  <option value="">{t.selectPlaceholder}</option>
+                  <option value="1-3个月">{t.tl1}</option>
+                  <option value="3-6个月">{t.tl2}</option>
+                  <option value="6-12个月">{t.tl3}</option>
+                  <option value="12个月以上">{t.tl4}</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm mb-2">预算范围</label>
+                <label className="block text-sm mb-2">{t.fieldBudget}</label>
                 <select
                   name="budget"
                   value={formData.budget}
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
                 >
-                  <option value="">请选择</option>
-                  <option value="1万以下">1万以下</option>
-                  <option value="1-5万">1-5万</option>
-                  <option value="5-10万">5-10万</option>
-                  <option value="10-15万">10-15万</option>
-                  <option value="15万以上">15万以上</option>
+                  <option value="">{t.selectPlaceholder}</option>
+                  <option value="1万以下">{t.budget1}</option>
+                  <option value="1-5万">{t.budget2}</option>
+                  <option value="5-10万">{t.budget3}</option>
+                  <option value="10-15万">{t.budget4}</option>
+                  <option value="15万以上">{t.budget5}</option>
                 </select>
               </div>
             </div>
 
             <div className="mb-6">
-              <label className="block text-sm mb-2">项目需求详情 *</label>
+              <label className="block text-sm mb-2">{t.fieldRequirements}</label>
               <textarea
                 name="requirements"
                 required
@@ -495,7 +533,7 @@ export function IndustrialOrder() {
                 onChange={handleChange}
                 rows={6}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
-                placeholder="请详细描述您的项目需求，包括功能要求、技术指标、设计风格等..."
+                placeholder={t.requirementsPlaceholder}
               />
             </div>
 
@@ -507,12 +545,12 @@ export function IndustrialOrder() {
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 animate-spin" size={20} />
-                  提交中...
+                  {t.submitting}
                 </>
               ) : (
                 <>
                   <CheckCircle className="mr-2" size={20} />
-                  提交咨询需求
+                  {t.submitButton}
                 </>
               )}
             </button>
@@ -540,23 +578,23 @@ export function IndustrialOrder() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="mb-6 text-white">联系我们</h2>
+            <h2 className="mb-6 text-white">{t.contactTitle}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
               <div>
-                <p className="mb-2">电话咨询</p>
+                <p className="mb-2">{t.contactPhone}</p>
                 <p className="text-gray-400">+86 136 8023 1042</p>
               </div>
               <div>
-                <p className="mb-2">邮件咨询</p>
+                <p className="mb-2">{t.contactEmail}</p>
                 <p className="text-gray-400">337839167@qq.com</p>
               </div>
               <div>
-                <p className="mb-2">微信咨询</p>
+                <p className="mb-2">{t.contactWechat}</p>
                 <p className="text-gray-400">yz277562627</p>
               </div>
             </div>
             <p className="mt-8 text-gray-400 text-sm">
-              ✓ 专业技术团队 ✓ 全流程服务 ✓ 快速响应机制 ✓ 项目保密协议
+              {t.contactNote}
             </p>
           </motion.div>
         </div>
