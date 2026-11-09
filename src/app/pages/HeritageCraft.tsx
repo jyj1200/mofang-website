@@ -175,36 +175,56 @@ const craftTypes = [
   },
 ];
 
-// ── Patterns: craftIds empty = universal ────────────────────────────────────
+// ── Patterns: 4 per craft category ─────────────────────────────────────────
 
 const patterns = [
-  {
-    id: 'lotus',
-    label: '莲花纹',
-    labelEn: 'Lotus',
-    desc: '出淤泥而不染，高洁品格象征',
-    descEn: 'Rising unsullied from mud — a symbol of integrity',
-    craftIds: [] as string[],
-  },
-  {
-    id: 'cloud',
-    label: '云纹',
-    labelEn: 'Cloud',
-    desc: '祥云绵绵，吉祥如意之意',
-    descEn: 'Continuous auspicious clouds, bringing fortune',
-    craftIds: [] as string[],
-  },
-  {
-    id: 'vine',
-    label: '缠枝莲',
-    labelEn: 'Scrolling Lotus Vine',
-    desc: '蔓延不断，寓意生生不息',
-    descEn: 'Twining lotus vines — the rhythm of endless life',
-    craftIds: [] as string[],
-  },
+  // 螺钿镶嵌
+  {"id":"jdz-pine-snow","label":"松雪纹","labelEn":"Pine & Snow","desc":"松枝覆雪，清寒高洁","descEn":"Pine branches under snow, chaste and austere","craftIds":["jdz"]},
+  {"id":"jdz-cloud-water","label":"云水纹","labelEn":"Cloud & Water","desc":"云气水波，虹彩流转","descEn":"Clouds and ripples with shifting iridescence","craftIds":["jdz"]},
+  {"id":"jdz-flower-bird","label":"折枝花鸟","labelEn":"Flower & Bird","desc":"折枝栖鸟，层叠嵌贝","descEn":"Cut branches and perching birds in layered shell inlay","craftIds":["jdz"]},
+  {"id":"jdz-landscape","label":"山水楼阁","labelEn":"Landscape Pavilion","desc":"远山近阁，贝片成景","descEn":"Distant hills and near pavilions, scenes in shell pieces","craftIds":["jdz"]},
+  // 苏绣
+  {"id":"su-reversible","label":"双面异色","labelEn":"Reversible Two-Tone","desc":"正反异色，针脚无痕","descEn":"Different colors on both sides, invisible stitches","craftIds":["su"]},
+  {"id":"su-flower-bird","label":"折枝花鸟","labelEn":"Flower & Bird","desc":"丝理分明，如画入绣","descEn":"Clear silk grain, a painting brought into embroidery","craftIds":["su"]},
+  {"id":"su-landscape","label":"山水远景","labelEn":"Distant Landscape","desc":"虚实晕染，远近相生","descEn":"Blended void and solid, near and far in harmony","craftIds":["su"]},
+  {"id":"su-carp","label":"双鲤戏水","labelEn":"Twin Carp","desc":"双鲤穿波，鳞光随线","descEn":"Twin carp through waves, scale-light along the thread","craftIds":["su"]},
+  // 花丝镶嵌
+  {"id":"silk-baoxiang","label":"宝相花","labelEn":"Baoxiang Lotus","desc":"花瓣层叠，中心对称","descEn":"Layered petals in central symmetry","craftIds":["silk"]},
+  {"id":"silk-ruyi-cloud","label":"如意云头","labelEn":"Ruyi Cloud","desc":"云头卷曲，连绵不断","descEn":"Curling cloud heads, one after another without end","craftIds":["silk"]},
+  {"id":"silk-dragon","label":"龙凤呈祥","labelEn":"Dragon & Phoenix","desc":"錾刻盘绕，宫廷气象","descEn":"Chased coils with a courtly aura","craftIds":["silk"]},
+  {"id":"silk-scroll-vine","label":"缠枝卷草","labelEn":"Scrolling Vine","desc":"枝蔓回旋，填空补隙","descEn":"Twining scrolls filling every space","craftIds":["silk"]},
+  // 缂丝
+  {"id":"kesi-waterfowl","label":"莲塘水禽","labelEn":"Lotus Pond Waterfowl","desc":"摹宋人小品，色阶渐变","descEn":"After Song vignettes, graded color steps","craftIds":["kesi"]},
+  {"id":"kesi-plum-magpie","label":"梅鹊","labelEn":"Plum & Magpie","desc":"一枝一鹊，缂织如笔","descEn":"One branch, one magpie — kesi woven like a brushstroke","craftIds":["kesi"]},
+  {"id":"kesi-landscape","label":"宋画山水","labelEn":"Song Landscape","desc":"通经断纬，皴法入织","descEn":"Continuous warp, cut weft — texture strokes turned to weaving","craftIds":["kesi"]},
+  {"id":"kesi-cloud-dragon","label":"云龙","labelEn":"Cloud Dragon","desc":"龙身盘云，金线勾鳞","descEn":"Dragon coiled in clouds, scales outlined in gold thread","craftIds":["kesi"]},
+  // 蜀锦
+  {"id":"bro-pearl-birds","label":"联珠对禽","labelEn":"Linked-Pearl Birds","desc":"联珠环列，双禽对称","descEn":"Pearl roundels in rows, symmetrical bird pairs","craftIds":["brocade"]},
+  {"id":"bro-medallion","label":"团花","labelEn":"Medallion","desc":"圆团居中，四向连续","descEn":"Centered rounds repeated in four directions","craftIds":["brocade"]},
+  {"id":"bro-lattice","label":"菱格填花","labelEn":"Lattice Floral","desc":"菱形骨架，格内填花","descEn":"Diamond lattice framework filled with flowers","craftIds":["brocade"]},
+  {"id":"bro-moonlight","label":"月华晕色","labelEn":"Moonlight Gradient","desc":"横向晕色，如月华铺展","descEn":"Horizontal shading, like moonlight spreading out","craftIds":["brocade"]},
+  // 扎染
+  {"id":"tie-butterfly","label":"蝴蝶","labelEn":"Butterfly","desc":"扎结双翼，晕染自然","descEn":"Bound wings with naturally bled dye","craftIds":["tiedye"]},
+  {"id":"tie-plum-dots","label":"梅花点","labelEn":"Plum Dots","desc":"点扎成梅，蓝白相生","descEn":"Tied dots into plum blossoms, blue and white in birth","craftIds":["tiedye"]},
+  {"id":"tie-spiral","label":"螺旋","labelEn":"Spiral","desc":"中心旋转，纹随褶走","descEn":"Spinning from the center, pattern follows the fold","craftIds":["tiedye"]},
+  {"id":"tie-free","label":"自由晕染","labelEn":"Free Dye","desc":"无固定图样，每件唯一","descEn":"No fixed design — every piece is unique","craftIds":["tiedye"]},
+  // 木雕
+  {"id":"wood-flower-bird","label":"花鸟","labelEn":"Flower & Bird","desc":"枝头栖鸟，透雕见空","descEn":"Bird perched on the branch, openwork carving through","craftIds":["wood"]},
+  {"id":"wood-figures","label":"山水人物","labelEn":"Landscape & Figures","desc":"层叠进深，故事成幅","descEn":"Layered depth, a story across the panel","craftIds":["wood"]},
+  {"id":"wood-scholar","label":"博古清供","labelEn":"Scholar's Objects","desc":"瓶炉书卷，文房清玩","descEn":"Vessels, scrolls and studio curios","craftIds":["wood"]},
+  {"id":"wood-cloud-dragon","label":"云龙","labelEn":"Cloud Dragon","desc":"龙穿云间，浮雕起线","descEn":"Dragon through clouds, raised relief lines","craftIds":["wood"]},
+  // 玉雕
+  {"id":"jade-zodiac","label":"生肖","labelEn":"Zodiac","desc":"依料取形，圆润饱满","descEn":"Form follows the stone, rounded and full","craftIds":["jade"]},
+  {"id":"jade-ruyi","label":"如意","labelEn":"Ruyi","desc":"云头卷尾，纳福寓意","descEn":"Cloud head and curling tail, a fortune motif","craftIds":["jade"]},
+  {"id":"jade-plaque","label":"山水牌","labelEn":"Landscape Plaque","desc":"方寸之间，远山近水","descEn":"Distant hills and near water within a small square","craftIds":["jade"]},
+  {"id":"jade-archaic","label":"仿古兽面","labelEn":"Archaic Beast","desc":"兽面饕餮，古意沉厚","descEn":"Taotie mask, heavy with archaic gravity","craftIds":["jade"]},
+  // 冰裂纹陶瓷（素面开片为默认首项）
+  {"id":"celadon-plain","label":"素面开片","labelEn":"Plain Crackle","desc":"不施纹饰，以釉面冰裂为美","descEn":"No ornament — the beauty is the glazed ice-crackle itself","craftIds":["celadon"]},
+  {"id":"celadon-petal","label":"莲瓣刻花","labelEn":"Carved Lotus Petal","desc":"外壁刻瓣，瓣线随釉流动","descEn":"Petals carved on the wall, lines flowing with the glaze","craftIds":["celadon"]},
+  {"id":"celadon-ribbed","label":"弦纹","labelEn":"Ribbed","desc":"环壁起线，疏密有致","descEn":"Lines ringing the wall, spaced with rhythm","craftIds":["celadon"]},
+  {"id":"celadon-vine","label":"缠枝刻花","labelEn":"Carved Vine","desc":"刀锋走釉，枝蔓连绵","descEn":"Blade through glaze, vines unbroken","craftIds":["celadon"]},
 ];
 
-// 专属纹样等设计端提供，直接往对应条目的 craftIds 里填门类 id 即可
 
 // ── Sizes / formats ─────────────────────────────────────────────────────────
 
@@ -255,7 +275,7 @@ const works = [
 
 export function HeritageCraft() {
   const [activeCraft, setActiveCraft] = useState('jdz');
-  const [activePattern, setActivePattern] = useState('lotus');
+  const [activePattern, setActivePattern] = useState(patterns[0].id);
   const [activeSize, setActiveSize] = useState('medium');
   const [submitted, setSubmitted] = useState(false);
   const { language } = useLanguage();
@@ -264,9 +284,9 @@ export function HeritageCraft() {
 
   const craft = craftTypes.find((c) => c.id === activeCraft)!;
 
-  // 按当前门类过滤纹样：craftIds 为空视为通用
+  // 按当前门类过滤纹样（每门类各 4 项）
   const filteredPatterns = patterns.filter(
-    (p) => !p.craftIds.length || p.craftIds.includes(activeCraft)
+    (p) => p.craftIds.includes(activeCraft)
   );
 
   // 门类切换时，若当前纹样不在新列表里，重置为首项
@@ -518,13 +538,13 @@ export function HeritageCraft() {
                 <div>
                   <SectionTitle index="二" title={t.sectionPattern} />
                   {hasPatternOptions ? (
-                    <div className="flex gap-3 mt-4 flex-wrap">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                       {filteredPatterns.map((p) => (
                         <button
                           key={p.id}
                           type="button"
                           onClick={() => setActivePattern(p.id)}
-                          className="flex-1 min-w-[7rem] px-4 py-3 rounded-xl text-center transition-all duration-200 text-sm"
+                          className="px-4 py-3 rounded-xl text-center transition-all duration-200 text-sm"
                           style={{
                             border: activePattern === p.id
                               ? '1.5px solid #7cb9e8'
