@@ -1,5 +1,29 @@
 export const translations = {
   zh: {
+    pageEnding: {
+      "indTitle": "开启您的工业设计项目",
+      "indDesc": "专业团队为您提供从概念到量产的全流程技术支持",
+      "indBtn1": "咨询工业设计",
+      "indBtn2": "查看更多案例",
+      "cultTitle": "定制您的文创产品",
+      "cultDesc": "从创意构思到批量生产，我们为您提供一站式文创设计服务",
+      "cultBtn1": "立即定制",
+      "cultBtn2": "浏览文创案例",
+      "defTitle": "让创意成为现实",
+      "defDesc": "墨方智能科技 - 以科研驱动设计，用创意赋能产业",
+      "defBtn1": "开始咨询",
+      "defBtn2": "了解团队",
+      "phoneTitle": "电话咨询",
+      "phoneDesc": "工作日 9:00-18:00 专业顾问为您服务",
+      "emailTitle": "邮件咨询",
+      "emailDesc": "24小时内回复，详细项目方案讨论",
+      "wechatTitle": "微信咨询",
+      "wechatDesc": "扫码添加企业微信，获取即时响应",
+      "statCases": "成功案例",
+      "statPartners": "合作企业",
+      "statSatisfaction": "客户满意度",
+      "statAwards": "设计奖项"
+    },
     indOrder: {
       "metaTitle": "工业设计服务 - 墨方智能科技",
       "metaDesc": "墨方智能科技工业设计服务，提供从概念到生产的全流程技术支持，包括概念设计、结构设计、样机制作、生产对接等专业服务。",
@@ -614,6 +638,30 @@ export const translations = {
   },
   
   en: {
+    pageEnding: {
+      "indTitle": "Start Your Industrial Design Project",
+      "indDesc": "A professional team delivering full-process technical support from concept to mass production",
+      "indBtn1": "Consult on Design",
+      "indBtn2": "View More Cases",
+      "cultTitle": "Customize Your Cultural Creative Product",
+      "cultDesc": "From idea to mass production, one-stop cultural creative design service",
+      "cultBtn1": "Customize Now",
+      "cultBtn2": "Browse Cases",
+      "defTitle": "Make Ideas Real",
+      "defDesc": "Mofang Tech — driving design with research, empowering industry with creativity",
+      "defBtn1": "Start a Consultation",
+      "defBtn2": "Meet the Team",
+      "phoneTitle": "By Phone",
+      "phoneDesc": "Professional consultants on weekdays 9:00-18:00",
+      "emailTitle": "By Email",
+      "emailDesc": "Reply within 24 hours for detailed project discussion",
+      "wechatTitle": "By WeChat",
+      "wechatDesc": "Scan to add us on WeChat for instant response",
+      "statCases": "Successful Cases",
+      "statPartners": "Partners",
+      "statSatisfaction": "Client Satisfaction",
+      "statAwards": "Design Awards"
+    },
     indOrder: {
       "metaTitle": "Industrial Design Services - Mofang Tech",
       "metaDesc": "Mofang Tech provides end-to-end industrial design services from concept to production, including concept design, structural design, prototyping and manufacturing support.",
