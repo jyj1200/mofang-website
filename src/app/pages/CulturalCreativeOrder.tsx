@@ -456,7 +456,7 @@ export function CulturalCreativeOrder() {
               </div>
               <div>
                 <p className="mb-2">{t.contactEmail}</p>
-                <p className="text-gray-400">337839167@qq.com</p>
+                <p className="text-gray-400">mofangtech@qq.com</p>
               </div>
               <div>
                 <p className="mb-2">{t.contactWechat}</p>

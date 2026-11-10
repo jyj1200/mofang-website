@@ -234,7 +234,7 @@ export function CorporateGiftShop() {
               定制咨询
             </a>
             <a
-              href="mailto:337839167@qq.com"
+              href="mailto:mofangtech@qq.com"
               className="flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium border transition-all duration-200"
               style={{ borderColor: "#D9A7A7", color: "#C4A8A8", backgroundColor: "white" }}
             >
@@ -367,7 +367,7 @@ export function CorporateGiftShop() {
                 +86 136 8023 1042
               </a>
               <a
-                href="mailto:337839167@qq.com"
+                href="mailto:mofangtech@qq.com"
                 className="flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border whitespace-nowrap transition-all duration-200"
                 style={{ borderColor: "#3A3030", color: "#3A3030", backgroundColor: "transparent" }}
               >

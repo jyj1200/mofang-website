@@ -149,12 +149,12 @@ export function AIChatDialog({ isOpen, onClose }: AIChatDialogProps) {
 
     // 价格相关
     if (lowerMessage.includes('价格') || lowerMessage.includes('费用') || lowerMessage.includes('多少钱') || lowerMessage.includes('报价')) {
-      return '由于每个项目的需求、复杂度和数量都不同，我们需要根据具体情况提供报价。\\n\\n影响价格的因素包括：\\n• 设计复杂度\\n• 材料选择\\n• 工艺要求\\n• 生产数量\\n• 定制化程度\\n\\n建议您通过以下方式获取详细报价：\\n📧 邮箱：337839167@qq.com\\n📱 电话：+8613680231042\\n💬 填写在线定制表单\\n\\n我们会在24小时内给您专业的方案和报价。';
+      return '由于每个项目的需求、复杂度和数量都不同，我们需要根据具体情况提供报价。\\n\\n影响价格的因素包括：\\n• 设计复杂度\\n• 材料选择\\n• 工艺要求\\n• 生产数量\\n• 定制化程度\\n\\n建议您通过以下方式获取详细报价：\\n📧 邮箱：mofangtech@qq.com\\n📱 电话：+8613680231042\\n💬 填写在线定制表单\\n\\n我们会在24小时内给您专业的方案和报价。';
     }
 
     // 联系方式相关
     if (lowerMessage.includes('联系') || lowerMessage.includes('电话') || lowerMessage.includes('地址') || lowerMessage.includes('邮箱')) {
-      return '📍 联系我们：\\n\\n📧 邮箱：337839167@qq.com\\n📱 电话：+8613680231042\\n🏢 地址：广东省中山市火炬开发区科技园\\n⏰ 工作时间：周一至周五 9:00-18:00\\n\\n您也可以直接在网站上填写定制表单，我们会尽快与您联系！';
+      return '📍 联系我们：\\n\\n📧 邮箱：mofangtech@qq.com\\n📱 电话：+8613680231042\\n🏢 地址：广东省中山市火炬开发区科技园\\n⏰ 工作时间：周一至周五 9:00-18:00\\n\\n您也可以直接在网站上填写定制表单，我们会尽快与您联系！';
     }
 
     // 礼品套装详细信息
@@ -168,7 +168,7 @@ export function AIChatDialog({ isOpen, onClose }: AIChatDialogProps) {
 
     // 招聘相关
     if (lowerMessage.includes('招聘') || lowerMessage.includes('加入') || lowerMessage.includes('职位') || lowerMessage.includes('应聘')) {
-      return '感谢您对墨方智能科技的关注！\\n\\n我们正在寻找充满热情的设计与工程人才。如果您热爱设计，追求创新，欢迎加入我们。\\n\\n💼 当前状态：暂无招聘职位\\n\\n但我们欢迎优秀人才随时投递简历：\\n📧 337839167@qq.com\\n\\n请在简历中注明应聘方向和期望岗位，我们会妥善保存您的信息，有合适机会时第一时间联系您。';
+      return '感谢您对墨方智能科技的关注！\\n\\n我们正在寻找充满热情的设计与工程人才。如果您热爱设计，追求创新，欢迎加入我们。\\n\\n💼 当前状态：暂无招聘职位\\n\\n但我们欢迎优秀人才随时投递简历：\\n📧 mofangtech@qq.com\\n\\n请在简历中注明应聘方向和期望岗位，我们会妥善保存您的信息，有合适机会时第一时间联系您。';
     }
 
     // 默认回复

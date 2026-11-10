@@ -69,7 +69,7 @@ export const COMPANY_KNOWLEDGE_BASE = `
 - 核心团队：来自西南交通大学、西安电子科技大学等顶尖院校
 - 联系方式：
   - 电话：+8613680231042
-  - 邮箱：337839167@qq.com
+  - 邮箱：mofangtech@qq.com
   - 地址：广东省中山市火炬开发区科技园
 
 ## 核心业务定位
@@ -282,6 +282,6 @@ export async function callLanguageModel(
     return '不支持的AI服务提供商';
   } catch (error) {
     console.error('Language Model API Error:', error);
-    return '抱歉，AI服务暂时不可用。请稍后再试或联系人工客服。\n\n📞 电话：+8613680231042\n📧 邮箱：337839167@qq.com';
+    return '抱歉，AI服务暂时不可用。请稍后再试或联系人工客服。\n\n📞 电话：+8613680231042\n📧 邮箱：mofangtech@qq.com';
   }
 }

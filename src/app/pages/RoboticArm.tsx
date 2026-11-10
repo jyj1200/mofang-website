@@ -539,7 +539,7 @@ export function RoboticArm() {
                 </motion.button>
                 <p className="text-center text-xs" style={{ color: '#444' }}>
                   或直接致电 <a href="tel:+8613680231042" style={{ color: '#0055FF' }}>+86 136 8023 1042</a>
-                  {' '}· 邮件 <a href="mailto:337839167@qq.com" style={{ color: '#0055FF' }}>337839167@qq.com</a>
+                  {' '}· 邮件 <a href="mailto:mofangtech@qq.com" style={{ color: '#0055FF' }}>mofangtech@qq.com</a>
                 </p>
               </form>
             ) : (
@@ -573,9 +573,9 @@ export function RoboticArm() {
               onMouseEnter={e => (e.currentTarget.style.color = '#111')} onMouseLeave={e => (e.currentTarget.style.color = '#444')}>
               <Phone size={12} /> +86 136 8023 1042
             </a>
-            <a href="mailto:337839167@qq.com" className="flex items-center gap-1.5 text-xs transition-colors" style={{ color: '#444' }}
+            <a href="mailto:mofangtech@qq.com" className="flex items-center gap-1.5 text-xs transition-colors" style={{ color: '#444' }}
               onMouseEnter={e => (e.currentTarget.style.color = '#111')} onMouseLeave={e => (e.currentTarget.style.color = '#444')}>
-              <Mail size={12} /> 337839167@qq.com
+              <Mail size={12} /> mofangtech@qq.com
             </a>
           </div>
         </div>

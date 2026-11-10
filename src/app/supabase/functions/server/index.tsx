@@ -92,7 +92,7 @@ app.post("/make-server-3f503f37/submit-industrial-inquiry", async (c) => {
       },
       body: JSON.stringify({
         from: "墨方智能科技 <onboarding@resend.dev>",
-        to: ["337839167@qq.com"],
+        to: ["mofangtech@qq.com"],
         subject: `【工业设计咨询】${data.company} - ${data.name}`,
         html: emailContent,
       }),
@@ -196,7 +196,7 @@ app.post("/make-server-3f503f37/submit-cultural-inquiry", async (c) => {
       },
       body: JSON.stringify({
         from: "墨方智能科技 <onboarding@resend.dev>",
-        to: ["337839167@qq.com"],
+        to: ["mofangtech@qq.com"],
         subject: `【文创定制咨询】${data.company || data.name} - ${data.productType}`,
         html: emailContent,
       }),

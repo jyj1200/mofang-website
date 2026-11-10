@@ -67,7 +67,7 @@ export function Footer() {
               </li>
               <li className="flex items-center text-gray-400 text-sm">
                 <Mail size={16} className="mr-2" />
-                337839167@qq.com
+                mofangtech@qq.com
               </li>
               <li className="flex items-start text-gray-400 text-sm">
                 <MapPin size={16} className="mr-2 mt-1 flex-shrink-0" />

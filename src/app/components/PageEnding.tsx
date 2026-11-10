@@ -75,7 +75,7 @@ export function PageEnding({ variant = 'default' }: PageEndingProps) {
       title: t.emailTitle,
       desc: t.emailDesc,
       descClass: 'text-gray-300',
-      action: { href: 'mailto:337839167@qq.com', label: '337839167@qq.com', isLink: true },
+      action: { href: 'mailto:mofangtech@qq.com', label: 'mofangtech@qq.com', isLink: true },
     },
     {
       icon: <MessageCircle size={24} />,

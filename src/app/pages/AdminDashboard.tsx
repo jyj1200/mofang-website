@@ -496,7 +496,7 @@ export function AdminDashboard() {
                   关闭
                 </button>
                 <a
-                  href={`mailto:${selectedInquiry.email || '337839167@qq.com'}?subject=关于您的咨询 - ${selectedInquiry.id}`}
+                  href={`mailto:${selectedInquiry.email || 'mofangtech@qq.com'}?subject=关于您的咨询 - ${selectedInquiry.id}`}
                   className="flex-1 px-4 py-2 bg-[#0066CC] text-white rounded-lg hover:opacity-90 transition-opacity text-center"
                 >
                   发送邮件
