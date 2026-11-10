@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>付款方式 Payment | 墨方智能科技 Mofang Tech</title>
+<meta name="description" content="墨方智能科技（Mofang Tech）付款方式说明：中国大陆业务由中山市墨方智能科技有限公司承接；境外业务由 HK SOE 承接，并通过 ANT INTERNATIONAL 完成跨境收单。" />
+<meta name="theme-color" content="#FAFAFA" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ tokens (取自 soehk.com) ============ */
+:root{
+  --ink:#2c2c2c; --ink-2:#4a4a50; --muted:#7a7a82; --muted-2:#9a9aa1;
+  --primary:#0066cc; --primary-d:#0052a3; --primary-t:#eaf2fb;
+  --sage:#7C9885; --sage-2:#8B9D83; --sage-3:#ABB89B; --sage-t:#f1f4ef;
+  --orange:#FF7A30;
+  --bg:#FAFAFA; --warm:#F5F3EF; --white:#fff;
+  --line:#E7E7EA; --line-2:#F0F0F2;
+  --r-xl:22px; --r-lg:18px; --r-md:12px; --r-sm:9px;
+  --sh-s:0 1px 2px rgba(20,20,25,.04), 0 4px 16px rgba(20,20,25,.045);
+  --sh-m:0 10px 36px rgba(20,20,25,.09);
+  --sh-l:0 24px 70px rgba(20,20,25,.14);
+  --max:1180px;
+  --ease:cubic-bezier(.22,.68,.24,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:Inter,"PingFang SC","Microsoft YaHei","Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15.5px; line-height:1.75; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:Poppins,Inter,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;font-weight:600;line-height:1.25;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+::selection{background:#cfe3f8}
+
+/* ============ 顶部滚动进度 ============ */
+.progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--sage),var(--primary));z-index:120;transition:width .1s linear}
+
+/* ============ 导航 ============ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
+.nav__in{max-width:var(--max);margin:0 auto;height:70px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav.solid{background:rgba(250,250,250,.86);backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid var(--line-2)}
+.brand{display:flex;align-items:center;gap:11px}
+.brand__mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--ink) 0%,#4a4a50 100%);display:grid;place-items:center;flex:0 0 auto}
+.brand__mark span{width:11px;height:11px;border:2px solid #fff;border-radius:2px;transform:rotate(45deg);display:block}
+.brand__txt strong{display:block;font-family:Poppins,sans-serif;font-size:15px;font-weight:600;letter-spacing:.02em;line-height:1.1}
+.brand__txt em{display:block;font-style:normal;font-size:9.5px;letter-spacing:.24em;color:var(--muted-2);text-transform:uppercase;line-height:1.4}
+.nav__menu{display:flex;align-items:center;gap:4px}
+.nav__menu a{font-size:13.5px;color:var(--ink-2);padding:8px 12px;border-radius:8px;transition:.22s var(--ease);position:relative}
+.nav__menu a:hover{background:rgba(44,44,44,.05);color:var(--ink)}
+.nav__menu a.on{color:var(--primary);font-weight:600}
+.nav__menu a.on::after{content:"";position:absolute;left:12px;right:12px;bottom:2px;height:2px;border-radius:2px;background:var(--primary)}
+.nav__right{display:flex;align-items:center;gap:10px}
+.lang{display:flex;align-items:center;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
+.lang button{border:0;background:transparent;font-size:11.5px;letter-spacing:.04em;color:var(--muted);padding:5px 9px;cursor:pointer;transition:.2s}
+.lang button.on{background:var(--ink);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:500;padding:11px 20px;border-radius:10px;transition:.24s var(--ease);white-space:nowrap}
+.btn--primary{background:var(--primary);color:#fff;box-shadow:0 4px 14px rgba(0,102,204,.24)}
+.btn--primary:hover{background:var(--primary-d);transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,102,204,.3)}
+.btn--dark{background:var(--ink);color:#fff}
+.btn--dark:hover{background:#1b1b1b;transform:translateY(-1px)}
+.btn--ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn--ghost:hover{border-color:#c9c9cf;background:#fbfbfc}
+.btn--lg{padding:15px 30px;font-size:15px;border-radius:12px}
+.btn svg{flex:0 0 auto}
+.burger{display:none;width:38px;height:38px;border:1px solid var(--line);border-radius:9px;background:#fff;cursor:pointer;place-items:center}
+.burger span{display:block;width:15px;height:1.5px;background:var(--ink);border-radius:2px;position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:15px;height:1.5px;background:var(--ink);border-radius:2px}
+.burger span::before{top:-5px}.burger span::after{top:5px}
+
+/* 移动端抽屉 */
+.drawer{position:fixed;inset:70px 0 auto;background:#fff;border-bottom:1px solid var(--line);z-index:99;padding:10px 24px 22px;display:none;box-shadow:var(--sh-m)}
+.drawer.open{display:block;animation:slideDown .3s var(--ease)}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.drawer a{display:block;padding:13px 4px;font-size:15px;border-bottom:1px solid var(--line-2)}
+.drawer a.on{color:var(--primary);font-weight:600}
+
+/* ============ 通用区块 ============ */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+section{position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;justify-content:center;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:16px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--sage-3)}
+.sec-h{font-size:clamp(26px,3.1vw,38px);letter-spacing:-.02em}
+.sec-sub{color:var(--muted);font-size:15px;max-width:620px;margin-top:14px}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ HERO ============ */
+.hero{padding:148px 0 70px;overflow:hidden;background:
+  radial-gradient(760px 380px at 12% 0%,rgba(124,152,133,.13),transparent 62%),
+  radial-gradient(700px 340px at 88% 12%,rgba(0,102,204,.075),transparent 60%),
+  linear-gradient(180deg,#FBFBFA 0%,var(--bg) 66%);}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(44,44,44,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(44,44,44,.028) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(700px 400px at 50% 0%,#000 20%,transparent 78%);pointer-events:none}
+.hero__grid{position:relative;display:block;max-width:840px;margin:0 auto;text-align:center}
+.hero h1{font-size:clamp(34px,4.5vw,54px);line-height:1.1;letter-spacing:-.03em;margin-bottom:20px}
+.hero h1 .thin{font-weight:300;color:var(--muted)}
+.hero h1 u{text-decoration:none;position:relative;z-index:0;white-space:nowrap}
+.hero h1 u::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:9px;background:rgba(124,152,133,.24);border-radius:2px;z-index:-1}
+.hero__lead{color:var(--ink-2);font-size:16px;max-width:660px;margin:0 auto}
+.hero__lead b{font-weight:600;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 9px;font-size:12.5px;color:var(--ink-2);box-shadow:var(--sh-s)}
+.chip i{width:17px;height:17px;border-radius:50%;display:grid;place-items:center;background:var(--sage-t);color:var(--sage);font-style:normal;font-size:10px;font-weight:700}
+.chip b{font-weight:600;color:var(--ink)}
+
+
+/* ============ 主体判定 ============ */
+.entity{padding:76px 0 20px}
+.entity__card{margin-top:34px;background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-s)}
+.tabs{display:flex;gap:6px;padding:12px;background:var(--warm);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{border:0;background:transparent;font-family:inherit;font-size:13.5px;color:var(--muted);padding:10px 17px;border-radius:9px;cursor:pointer;transition:.24s var(--ease);font-weight:500;display:inline-flex;align-items:center;gap:8px}
+.tab:hover{color:var(--ink);background:rgba(255,255,255,.7)}
+.tab.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:var(--sh-s)}
+.tab .dot{width:6px;height:6px;border-radius:50%;background:var(--muted-2);transition:.24s}
+.tab.on .dot{background:var(--primary)}
+.panel{padding:8px 30px 30px}
+.prow{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:17px 0;border-bottom:1px solid var(--line-2);align-items:start;animation:fadeUp .45s var(--ease) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.prow:last-of-type{border-bottom:0}
+.prow__k{font-size:12.5px;color:var(--muted);letter-spacing:.02em;padding-top:2px}
+.prow__v{font-size:15px;font-weight:500}
+.prow__v .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;background:var(--warm);border:1px solid var(--line);border-radius:6px;padding:2px 8px}
+.prow__v em{font-style:normal;display:block;font-size:12.5px;color:var(--muted);font-weight:400;margin-top:4px;line-height:1.6}
+.pnote{display:flex;gap:10px;background:var(--sage-t);border:1px solid #e2ebe0;border-radius:var(--r-md);padding:14px 16px;margin-top:20px;font-size:13px;color:#41543f;line-height:1.65;animation:fadeUp .5s var(--ease) both}
+.pnote svg{flex:0 0 auto;margin-top:2px;color:var(--sage)}
+
+/* ============ 资金流 ============ */
+.flow{padding:86px 0 70px}
+.flow__chain{display:grid;grid-template-columns:1fr 54px 1fr 54px 1fr;align-items:stretch;gap:0;margin-top:40px}
+.fnode{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 22px;box-shadow:var(--sh-s);position:relative;transition:.32s var(--ease)}
+.fnode:hover{transform:translateY(-3px);box-shadow:var(--sh-m);border-color:#dcdce1}
+.fnode__ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;margin-bottom:14px;background:var(--warm);color:var(--ink)}
+.fnode--hk .fnode__ico{background:#eef1ec;color:var(--sage)}
+.fnode--ant .fnode__ico{background:var(--primary-t);color:var(--primary)}
+.fnode__t{font-family:Poppins,sans-serif;font-size:15px;font-weight:600;margin-bottom:6px;line-height:1.35}
+.fnode__d{font-size:12.5px;color:var(--muted);line-height:1.65}
+.fnode__tag{position:absolute;top:20px;right:20px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);font-weight:600}
+.farrow{display:grid;place-items:center;color:#c4c4cb;position:relative}
+.farrow svg{animation:nudge 2.4s var(--ease) infinite}
+@keyframes nudge{0%,100%{transform:translateX(0);opacity:.65}50%{transform:translateX(4px);opacity:1}}
+.flow__rev{display:flex;align-items:center;gap:12px;margin-top:22px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.flow__rev .line{flex:1;min-width:60px;height:0;border-top:1px dashed #d4d4da}
+.flow__rev .lab{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--sh-s)}
+
+/* ============ 四步 ============ */
+.steps-sec{padding:20px 0 80px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;position:relative}
+.step{background:transparent;border:0;border-top:2px solid var(--line);padding:24px 26px 26px 0;text-align:left;cursor:pointer;font-family:inherit;position:relative;transition:.3s var(--ease)}
+.step::before{content:"";position:absolute;top:-2px;left:0;height:2px;width:0;background:var(--primary);transition:width .5s var(--ease)}
+.step.on::before{width:100%}
+.step.on~.step::before{width:0}
+.step__n{font-family:Poppins,sans-serif;font-size:12px;font-weight:600;color:var(--muted-2);letter-spacing:.1em;display:block;margin-bottom:20px;transition:.3s}
+.step.on .step__n{color:var(--primary)}
+.step__t{font-family:Poppins,sans-serif;font-size:15px;font-weight:600;color:var(--muted);transition:.3s;line-height:1.4;padding-right:14px}
+.step.on .step__t{color:var(--ink)}
+.step__d{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.65;display:none}
+.step.on .step__d{display:block;animation:fadeUp .4s var(--ease)}
+.step:hover .step__t{color:var(--ink-2)}
+
+/* ============ 付款方式卡 ============ */
+.methods{padding:0 0 86px}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
+.mcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 24px 24px;cursor:pointer;transition:.32s var(--ease);position:relative;overflow:hidden}
+.mcard::after{content:"";position:absolute;inset:0;border-radius:inherit;border:1.5px solid transparent;transition:.3s;pointer-events:none}
+.mcard:hover{transform:translateY(-4px);box-shadow:var(--sh-m)}
+.mcard.sel::after{border-color:var(--primary)}
+.mcard.sel{box-shadow:0 12px 34px rgba(0,102,204,.12)}
+.mcard__ico{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--warm);color:var(--ink);margin-bottom:18px;transition:.3s}
+.mcard.sel .mcard__ico{background:var(--primary-t);color:var(--primary)}
+.mcard__t{font-family:Poppins,sans-serif;font-size:16px;font-weight:600;margin-bottom:7px}
+.mcard__d{font-size:13px;color:var(--muted);line-height:1.7}
+.mcard__meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line-2)}
+.mtag{font-size:11px;color:var(--ink-2);background:var(--warm);border-radius:5px;padding:3px 8px;letter-spacing:.01em}
+.mcard__check{position:absolute;top:22px;right:22px;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;color:transparent;transition:.28s;background:#fff}
+.mcard.sel .mcard__check{background:var(--primary);border-color:var(--primary);color:#fff}
+
+/* ============ CTA 深色区 ============ */
+.cta{padding:0 0 90px}
+.cta__box{background:linear-gradient(135deg,#2c2c2c 0%,#1e1e20 62%,#24282a 100%);border-radius:28px;padding:56px;position:relative;overflow:hidden;color:#fff}
+.cta__box::before{content:"";position:absolute;width:520px;height:520px;right:-140px;top:-200px;background:radial-gradient(circle,rgba(124,152,133,.36),transparent 66%);pointer-events:none}
+.cta__box::after{content:"";position:absolute;width:420px;height:420px;left:-120px;bottom:-240px;background:radial-gradient(circle,rgba(0,102,204,.28),transparent 66%);pointer-events:none}
+.cta__in{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.cta__eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.cta__eyebrow::before{content:"";width:24px;height:1px;background:rgba(255,255,255,.4)}
+.cta h2{font-size:clamp(24px,2.8vw,34px);letter-spacing:-.02em;line-height:1.25;margin-bottom:16px}
+.cta p{color:rgba(255,255,255,.62);font-size:14.5px;max-width:460px;line-height:1.75}
+.cta__acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn--white{background:#fff;color:var(--ink);padding:15px 28px;font-size:14.5px;border-radius:12px;font-weight:600}
+.btn--white:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.28);background:#fff}
+.btn--outline{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.22);padding:15px 24px;font-size:14.5px;border-radius:12px}
+.btn--outline:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4)}
+.cta__url{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:20px 22px;backdrop-filter:blur(6px)}
+.cta__url .k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);font-weight:600;margin-bottom:10px;display:block}
+.cta__url .v{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff}
+.cta__url .v button{border:0;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);width:28px;height:28px;border-radius:7px;cursor:pointer;display:grid;place-items:center;transition:.2s}
+.cta__url .v button:hover{background:rgba(255,255,255,.22);color:#fff}
+.cta__url ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:9px}
+.cta__url li{font-size:12px;color:rgba(255,255,255,.6);display:flex;gap:8px;align-items:flex-start;line-height:1.6}
+.cta__url li svg{flex:0 0 auto;margin-top:2px;color:var(--sage-3)}
+
+/* ============ 安全 ============ */
+.secure{padding:0 0 86px}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+.scard{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:22px 20px;transition:.3s var(--ease)}
+.scard:hover{border-color:#dcdce1;box-shadow:var(--sh-s);transform:translateY(-2px)}
+.scard__ico{color:var(--sage);margin-bottom:12px}
+.scard__t{font-size:13.5px;font-weight:600;margin-bottom:6px;font-family:Poppins,sans-serif}
+.scard__d{font-size:12px;color:var(--muted);line-height:1.65}
+
+/* ============ FAQ ============ */
+.faq{padding:0 0 96px}
+.faq__list{margin-top:34px;border-top:1px solid var(--line)}
+.qa{border-bottom:1px solid var(--line)}
+.qa__q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;background:transparent;border:0;padding:23px 4px;font-family:inherit;font-size:15px;font-weight:500;color:var(--ink);text-align:left;cursor:pointer;transition:.22s}
+.qa__q:hover{color:var(--primary)}
+.qa__ico{flex:0 0 auto;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);transition:.3s var(--ease)}
+.qa.open .qa__ico{transform:rotate(45deg);background:var(--ink);border-color:var(--ink);color:#fff}
+.qa__a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease),opacity .3s}
+.qa.open .qa__a{opacity:1}
+.qa__a p{font-size:13.5px;color:var(--muted);line-height:1.85;padding:0 44px 24px 4px}
+.qa__a strong{color:var(--ink-2);font-weight:600}
+
+/* ============ footer ============ */
+.ft{background:#fff;border-top:1px solid var(--line);padding:52px 0 28px}
+.ft__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:36px}
+.ft h4{font-size:12px;letter-spacing:.06em;color:var(--ink);margin-bottom:14px;font-weight:600}
+.ft a,.ft li{font-size:13px;color:var(--muted);line-height:2}
+.ft ul{list-style:none;padding:0;margin:0}
+.ft a:hover{color:var(--primary)}
+.ft__desc{font-size:12.5px;color:var(--muted);line-height:1.8;max-width:260px;margin-top:14px}
+.ft__bot{margin-top:38px;padding-top:22px;border-top:1px solid var(--line-2);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--muted-2);line-height:1.9}
+
+/* ============ 弹窗 ============ */
+.modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.modal.open{display:flex}
+.modal__bd{position:absolute;inset:0;background:rgba(28,28,30,.42);backdrop-filter:blur(6px);animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal__card{position:relative;background:#fff;border-radius:20px;width:100%;max-width:452px;padding:34px 32px 28px;box-shadow:var(--sh-l);animation:pop .38s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.975)}to{opacity:1;transform:none}}
+.modal__ico{width:46px;height:46px;border-radius:14px;background:var(--primary-t);color:var(--primary);display:grid;place-items:center;margin-bottom:18px}
+.modal h3{font-size:19px;margin-bottom:10px;letter-spacing:-.01em}
+.modal p{font-size:13.5px;color:var(--muted);line-height:1.75}
+.modal__url{margin:20px 0 18px;background:var(--warm);border:1px solid var(--line);border-radius:10px;padding:13px 15px;display:flex;align-items:center;gap:9px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:var(--ink);overflow:hidden}
+.modal__url .lock{color:var(--sage);flex:0 0 auto}
+.modal__url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.modal__list{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:9px}
+.modal__list li{font-size:12.5px;color:var(--muted);display:flex;gap:9px;line-height:1.6}
+.modal__list svg{flex:0 0 auto;margin-top:2px;color:var(--sage)}
+.modal__acts{display:flex;gap:10px}
+.modal__acts .btn{flex:1;padding:13px;font-size:14px}
+.modal__x{position:absolute;top:14px;right:14px;width:30px;height:30px;border:0;background:transparent;color:var(--muted-2);cursor:pointer;border-radius:8px;display:grid;place-items:center;transition:.2s}
+.modal__x:hover{background:var(--warm);color:var(--ink)}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,20px);background:var(--ink);color:#fff;font-size:13px;padding:12px 20px;border-radius:10px;box-shadow:var(--sh-l);opacity:0;pointer-events:none;transition:.34s var(--ease);z-index:300;display:flex;align-items:center;gap:9px;max-width:min(90vw,480px);line-height:1.5}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* 悬浮咨询 */
+.float{position:fixed;right:24px;bottom:24px;z-index:90;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.float__btn{width:52px;height:52px;border-radius:50%;background:var(--ink);color:#fff;border:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.22);transition:.3s var(--ease)}
+.float__btn:hover{transform:translateY(-3px) scale(1.04);background:#1b1b1b}
+.float__panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;width:250px;box-shadow:var(--sh-m);display:none}
+.float__panel.open{display:block;animation:fadeUp .3s var(--ease)}
+.float__panel h5{margin:0 0 4px;font-family:Poppins,sans-serif;font-size:13.5px}
+.float__panel p{font-size:11.5px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.float__panel a{display:flex;align-items:center;gap:9px;padding:9px 0;font-size:12.5px;border-top:1px solid var(--line-2);color:var(--ink-2);transition:.2s}
+.float__panel a:hover{color:var(--primary)}
+.float__panel a:first-child{border-top:0}
+
+/* ============ 响应式 ============ */
+@media(max-width:1000px){
+  .hero__grid{grid-template-columns:1fr;gap:44px}
+  .flow__chain{grid-template-columns:1fr;gap:0}
+  .farrow{height:44px;transform:rotate(90deg)}
+  .cta__in{grid-template-columns:1fr;gap:32px}
+  .sgrid{grid-template-columns:repeat(2,1fr)}
+  .mgrid{grid-template-columns:1fr}
+  .ft__grid{grid-template-columns:1fr 1fr;gap:28px}
+  .steps{grid-template-columns:1fr 1fr;gap:0}
+  .step{padding-bottom:22px}
+}
+@media(max-width:820px){
+  .nav__menu{display:none}
+  .nav__right .btn{display:none}
+  .burger{display:grid}
+  .hero{padding:118px 0 56px}
+  .panel{padding:6px 20px 24px}
+  .prow{grid-template-columns:1fr;gap:4px;padding:14px 0}
+  .cta__box{padding:34px 24px;border-radius:22px}
+  .modal__card{padding:28px 22px 22px}
+}
+@media(max-width:520px){
+  .steps{grid-template-columns:1fr}
+  .sgrid{grid-template-columns:1fr}
+  .ft__grid{grid-template-columns:1fr}
+  .hero h1{font-size:31px}
+  .float{right:16px;bottom:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="https://soehk.com/">
+      <span class="brand__mark"><span></span></span>
+      <span class="brand__txt">
+        <strong>墨方智能科技</strong>
+        <em>Mofang Tech</em>
+      </span>
+    </a>
+
+    <nav class="nav__menu">
+      <a href="https://soehk.com/" data-en="Home">首页</a>
+      <a href="https://soehk.com/cultural-creative" data-en="Cultural Creative">文创产品</a>
+      <a href="https://soehk.com/industrial-design" data-en="Industrial Design">工业设计</a>
+      <a href="https://soehk.com/team" data-en="Team">我们的团队</a>
+      <a href="#" class="on" data-en="Payment">付款方式</a>
+    </nav>
+
+    <div class="nav__right">
+      <div class="lang" role="group" aria-label="Language">
+        <button id="langZh" class="on" type="button">中</button>
+        <button id="langEn" type="button">EN</button>
+      </div>
+      <button class="btn btn--primary" type="button" onclick="openPay()">
+        <span data-en="Pay Now">立即付款</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <button class="burger" id="burger" type="button" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer">
+    <a href="https://soehk.com/" data-en="Home">首页</a>
+    <a href="https://soehk.com/cultural-creative" data-en="Cultural Creative">文创产品</a>
+    <a href="https://soehk.com/industrial-design" data-en="Industrial Design">工业设计</a>
+    <a href="https://soehk.com/team" data-en="Team">我们的团队</a>
+    <a href="#" class="on" data-en="Payment">付款方式</a>
+    <button class="btn btn--primary" style="width:100%;margin-top:16px" type="button" onclick="openPay()" data-en="Pay Now">立即付款</button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="reveal">
+      <div class="eyebrow" data-en="Payment">付款方式</div>
+      <h1>
+        <span data-en="Payment methods">付款方式</span><br>
+        <span class="thin" data-en="Contracting entity and payment channel for overseas business">境外业务的签约主体与收款通道</span>
+      </h1>
+      <p class="hero__lead" data-en="For products designed by Zhongshan Mofang Intelligent Technology Co., Ltd., overseas business is handled together with HK SOE, and payment is completed through ANT INTERNATIONAL's cross-border acquiring service.">
+        中山市墨方智能科技有限公司设计的相关产品，境外业务由 <b>HK SOE</b> 合作承接，并通过
+        <b>ANT INTERNATIONAL</b> 的跨境收单服务完成付款。
+      </p>
+      <div class="chips">
+        <span class="chip"><i>✓</i><span data-en="Overseas business: HK SOE">境外业务：HK SOE</span></span>
+        <span class="chip"><i>✓</i><span data-en="Acquiring: ANT INTERNATIONAL">收单：ANT INTERNATIONAL</span></span>
+        <span class="chip"><i>✓</i><span data-en="No card data on this page">本页不收集卡号</span></span>
+      </div>
+    </div>
+    </div>
+</section>
+
+<!-- ===================== 主体判定 ===================== -->
+<section class="entity">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-en="Who you contract with">签约主体</div>
+      <h2 class="sec-h" data-en="Contracting entity by region">按地区查看签约主体</h2>
+      <p class="sec-sub" data-en="Choose the payer region to see the contracting entity, payment method, document type and settlement currency.">
+        选择付款方所在地区，可以看到对应的签约主体、付款方式、票据类型和结算币种。
+      </p>
+    </div>
+
+    <div class="entity__card reveal" style="transition-delay:.08s">
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <div class="panel" id="panel"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 资金流 ===================== -->
+<section class="flow">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-en="How the money flows">资金流向</div>
+      <h2 class="sec-h" data-en="Who is involved in the payment">付款涉及哪三方</h2>
+      <p class="sec-sub" data-en="The client pays HK SOE. HK SOE signs the contract and issues the invoice. ANT INTERNATIONAL handles acquiring and settlement. Design and production are still done by the Mofang team.">
+        客户把款付给 HK SOE，HK SOE 负责签约和开票，ANT INTERNATIONAL 负责收单和结算。产品的设计和制作仍由墨方团队完成。
+      </p>
+    </div>
+
+    <div class="flow__chain reveal" style="transition-delay:.06s">
+      <div class="fnode">
+        <span class="fnode__tag" data-en="Client">客户</span>
+        <div class="fnode__ico">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="fnode__t" data-en="Overseas Client">境外客户</div>
+        <div class="fnode__d" data-en="Places the order and pays at checkout by card or wallet; for bank transfer, pays against a proforma invoice.">下单后直接进收银台，用卡或钱包付款；走电汇的，先凭形式发票汇款。</div>
+      </div>
+
+      <div class="farrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+
+      <div class="fnode fnode--hk">
+        <span class="fnode__tag" data-en="Contracting">签约</span>
+        <div class="fnode__ico">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
+        </div>
+        <div class="fnode__t">HK SOE</div>
+        <div class="fnode__d" data-en="Signs the contract, issues the proforma and commercial invoices, and receives settlement. Overseas business for products designed by Mofang is handled by this company.">签署合同、开具形式发票与商业发票、接收结算款。墨方设计产品的境外业务由这家公司承接。</div>
+      </div>
+
+      <div class="farrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+
+      <div class="fnode fnode--ant">
+        <span class="fnode__tag" data-en="Acquiring">收单</span>
+        <div class="fnode__ico">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+        </div>
+        <div class="fnode__t">ANT INTERNATIONAL</div>
+        <div class="fnode__d" data-en="Provides the checkout page, processes card and wallet payments, then settles to HK SOE.">提供收银台页面，处理银行卡和钱包收款，然后向 HK SOE 结算。</div>
+      </div>
+    </div>
+
+    <div class="flow__rev reveal" style="transition-delay:.1s">
+      <span class="lab">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        <span data-en="Direction of contract, invoice and after-sales">合同、发票与售后的方向</span>
+      </span>
+      <span class="line"></span>
+      <span data-en="Design and production by the Mofang team">设计与制作由墨方团队负责</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 四步 ===================== -->
+<section class="steps-sec">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-en="Process">付款流程</div>
+      <h2 class="sec-h" data-en="Four steps">付款流程分四步</h2>
+      <p class="sec-sub" data-en="Click a step to see what it involves.">点击任一步骤，可以看这一步要做什么。</p>
+    </div>
+    <div class="steps reveal" id="steps" style="transition-delay:.06s"></div>
+  </div>
+</section>
+
+<!-- ===================== 付款方式 ===================== -->
+<section class="methods">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-en="Methods">可选方式</div>
+      <h2 class="sec-h" data-en="Accepted payment methods">支持的付款方式</h2>
+      <p class="sec-sub" data-en="The checkout shows the methods available in the payer region. The list below is the general coverage.">收银台按付款人所在地区显示可用的方式，下面是通常的覆盖范围。</p>
+    </div>
+    <div class="mgrid reveal" id="mgrid" style="transition-delay:.06s"></div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta">
+  <div class="wrap">
+    <div class="cta__box reveal">
+      <div class="cta__in">
+        <div>
+          <div class="cta__eyebrow" data-en="Ready to pay">准备付款</div>
+          <h2 data-en="Go to checkout">前往收银台</h2>
+          <p data-en="The checkout page is provided by ANT INTERNATIONAL. Clicking takes you to the payment subdomain, where card details are entered; this page does not receive or store that information.">
+            收银台页面由 ANT INTERNATIONAL 提供，点击后进入付款子域名，卡号在收银台页面输入，本页不接收也不保存这些信息。
+          </p>
+          <div class="cta__acts">
+            <button class="btn btn--white" type="button" onclick="openPay()">
+              <span data-en="Proceed to payment">前往付款</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <a class="btn btn--outline" href="mailto:mofangtech@qq.com">
+              <span data-en="Ask for an invoice first">先索取形式发票</span>
+            </a>
+          </div>
+        </div>
+        <div class="cta__url">
+          <span class="k" data-en="Checkout domain">收银台域名</span>
+          <div class="v">
+            <span id="payUrlText">pay.soehk.com</span>
+            <button type="button" onclick="copyPayUrl()" aria-label="Copy">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            </button>
+          </div>
+          <ul>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="The checkout uses a separate subdomain">收银台使用独立子域名</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="HTTPS throughout; check the domain in the address bar">全程 HTTPS，可核对地址栏域名</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="Card details are entered on the checkout page only">卡号只在收银台页面输入</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 安全 ===================== -->
+<section class="secure">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-en="Security">安全</div>
+      <h2 class="sec-h" data-en="How payment details are handled">支付信息怎么处理</h2>
+      <p class="sec-sub" data-en="This page has no payment form and no card field, so it cannot receive card numbers.">
+        本页没有支付表单，也没有卡号输入框，无法接收卡号信息。
+      </p>
+    </div>
+    <div class="sgrid reveal" id="sgrid" style="transition-delay:.06s"></div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="faq">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-en="FAQ">常见问题</div>
+      <h2 class="sec-h" data-en="Frequently asked questions">常见问题</h2>
+    </div>
+    <div class="faq__list reveal" id="faq" style="transition-delay:.06s"></div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft__grid">
+      <div>
+        <a class="brand" href="https://soehk.com/">
+          <span class="brand__mark"><span></span></span>
+          <span class="brand__txt"><strong>墨方智能科技</strong><em>Mofang Tech</em></span>
+        </a>
+        <p class="ft__desc" data-en="Research-driven industrial design and cultural creative studio. Design, prototyping and production under one roof.">
+          以科研人员为核心的工业设计与文创产品设计机构。设计、打样与制作一体化。
+        </p>
+      </div>
+      <div>
+        <h4 data-en="Quick Links">快速导航</h4>
+        <ul>
+          <li><a href="https://soehk.com/cultural-creative" data-en="Cultural Creative">文创产品</a></li>
+          <li><a href="https://soehk.com/industrial-design" data-en="Industrial Design">工业设计</a></li>
+          <li><a href="https://soehk.com/team" data-en="Team">我们的团队</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-en="Payment">付款</h4>
+        <ul>
+          <li><a href="#" data-en="Payment methods">付款方式</a></li>
+          <li><a href="#" data-en="Proceed to checkout">前往收银台</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-en="Contact">联系我们</h4>
+        <ul>
+          <li><a href="tel:+8613680231042">+86 136 8023 1042</a></li>
+          <li><a href="mailto:mofangtech@qq.com">mofangtech@qq.com</a></li>
+          <li data-en="Zhongshan, Guangdong, China">广东省中山市</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft__bot">
+      <span data-en="© 2024 Zhongshan Mofang Intelligent Technology Co., Ltd. All rights reserved.">© 2024 中山市墨方智能科技有限公司 版权所有</span>
+      <span data-en="Overseas business handled together with HK SOE · Payments processed by ANT INTERNATIONAL">境外业务由 HK SOE 合作承接 · 付款服务由 ANT INTERNATIONAL 提供</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== 悬浮咨询 ===================== -->
+<div class="float">
+  <div class="float__panel" id="floatPanel">
+    <a href="mailto:mofangtech@qq.com">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+      mofangtech@qq.com
+    </a>
+    <a href="tel:+8613680231042">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.1a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+      +86 136 8023 1042
+    </a>
+  </div>
+  <button class="float__btn" id="floatBtn" type="button" aria-label="Contact">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.9 9.9 0 0 1-3.4-.6L3 21l1.7-4.6A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z"/></svg>
+  </button>
+</div>
+
+<!-- ===================== 跳转弹窗 ===================== -->
+<div class="modal" id="payModal" role="dialog" aria-modal="true" aria-labelledby="payModalTitle">
+  <div class="modal__bd" onclick="closePay()"></div>
+  <div class="modal__card">
+    <button class="modal__x" type="button" onclick="closePay()" aria-label="Close">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal__ico">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <h3 id="payModalTitle" data-en="You are leaving soehk.com">即将离开 soehk.com</h3>
+    <p data-en="The next page is the checkout provided by ANT INTERNATIONAL for HK SOE. Card details are entered there.">
+      接下来会打开 ANT INTERNATIONAL 为 HK SOE 提供的收银台页面，卡号在那一页输入。
+    </p>
+    <div class="modal__url">
+      <svg class="lock" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span id="modalUrl">https://pay.soehk.com</span>
+    </div>
+    <ul class="modal__list">
+      <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="Payee on the statement is HK SOE">账单上的收款方是 HK SOE</span></li>
+      <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="Have your contract or invoice number ready">准备好合同号或者发票号</span></li>
+      <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="A receipt is emailed after payment">付款成功后会发回执到邮箱</span></li>
+    </ul>
+    <div class="modal__acts">
+      <button class="btn btn--ghost" type="button" onclick="closePay()" data-en="Stay here">留在本页</button>
+      <button class="btn btn--primary" type="button" id="modalGo">
+        <span data-en="Proceed">前往付款</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =====================================================================
+   配置区 —— 上线前只需要改这里
+   ===================================================================== */
+const CONFIG = {
+  // 付款子域名（收银台）。填好后把 payUrlVerified 改成 true，按钮即真正跳转。
+  payUrl: 'https://pay.soehk.com',
+  payUrlVerified: false,   // 【待确认】子域名与收银台链接就绪后置为 true
+  email: 'mofangtech@qq.com',
+  phone: '+86 136 8023 1042'
+};
+
+/* ============ 多语言 ============ */
+let LANG = 'zh';
+
+const T = {
+  entities: [
+    {
+      id: 'cn',
+      tab:   { zh: '中国大陆', en: 'Mainland China' },
+      rows: [
+        { k:{zh:'签约主体',en:'Contracting entity'}, v:{zh:'中山市墨方智能科技有限公司',en:'Zhongshan Mofang Intelligent Technology Co., Ltd.'} },
+        { k:{zh:'付款方式',en:'Payment method'}, v:{zh:'境内对公账户转账',en:'Domestic corporate bank transfer'} },
+        { k:{zh:'票据类型',en:'Document'}, v:{zh:'增值税发票（普票 / 专票）',en:'Chinese VAT invoice (general / special)'} },
+        { k:{zh:'结算币种',en:'Currency'}, v:{zh:'CNY 人民币',en:'CNY'} },
+        { k:{zh:'境外主体',en:'Overseas entity'}, v:{zh:'不适用',en:'Not applicable'}, sub:{zh:'境内业务不经过 HK SOE，也不通过 ANT INTERNATIONAL 收单。',en:'Mainland business does not go through HK SOE or ANT INTERNATIONAL acquiring.'} }
+      ],
+      note: { zh:'如果付款方是境外公司，或者需要用外币付款，请看另外两个标签。', en:'If the payer is an overseas company or the payment is in foreign currency, see the other two tabs.' }
+    },
+    {
+      id: 'hk',
+      tab:   { zh: '中国香港、澳门、台湾', en: 'Hong Kong, Macao and Taiwan, China' },
+      rows: [
+        { k:{zh:'签约主体',en:'Contracting entity'}, v:{zh:'HK SOE',en:'HK SOE'} },
+        { k:{zh:'付款方式',en:'Payment method'}, v:{zh:'ANT INTERNATIONAL 跨境收单',en:'ANT INTERNATIONAL cross-border acquiring'} },
+        { k:{zh:'票据类型',en:'Document'}, v:{zh:'Commercial Invoice 商业发票',en:'Commercial Invoice'}, sub:{zh:'商业发票在交付时开具。走电汇的，付款前会先收到形式发票。',en:'The commercial invoice is issued on delivery. For bank transfer, a proforma invoice comes before payment.'} },
+        { k:{zh:'结算币种',en:'Currency'}, v:{zh:'以合同约定为准',en:'As agreed in the contract'} },
+        { k:{zh:'发票说明',en:'Invoice note'}, v:{zh:'不提供中国增值税发票',en:'Chinese VAT invoice not available'}, sub:{zh:'发票由香港公司开具。如果需要中国增值税发票，请以境内主体签约。',en:'The invoice is issued by the Hong Kong company. If you need a Chinese VAT invoice, contract with the mainland entity instead.'} }
+      ],
+      note: { zh:'香港、澳门和台湾地区的订单与海外订单走同一流程，都由 HK SOE 签约，通过 ANT INTERNATIONAL 收款。', en:'Orders from Hong Kong, Macao and Taiwan follow the same process as other overseas orders: HK SOE signs, ANT INTERNATIONAL collects.' }
+    },
+    {
+      id: 'intl',
+      tab:   { zh: '其他国家和地区', en: 'Other regions' },
+      rows: [
+        { k:{zh:'签约主体',en:'Contracting entity'}, v:{zh:'HK SOE',en:'HK SOE'} },
+        { k:{zh:'付款方式',en:'Payment method'}, v:{zh:'ANT INTERNATIONAL 跨境收单',en:'ANT INTERNATIONAL cross-border acquiring'} },
+        { k:{zh:'票据类型',en:'Document'}, v:{zh:'Commercial Invoice 商业发票',en:'Commercial Invoice'}, sub:{zh:'商业发票在交付时开具。走电汇的，付款前会先收到形式发票。',en:'The commercial invoice is issued on delivery. For bank transfer, a proforma invoice comes before payment.'} },
+        { k:{zh:'结算币种',en:'Currency'}, v:{zh:'以合同约定为准',en:'As agreed in the contract'} },
+        { k:{zh:'服务交付',en:'Delivery'}, v:{zh:'设计和制作仍由墨方团队完成',en:'Design and production are still done by the Mofang team'} }
+      ],
+      note: { zh:'合同、发票和售后都由 HK SOE 对接，客户只需要联系一个主体。', en:'Contracts, invoices and after-sales all go through HK SOE, so you only deal with one company.' }
+    }
+  ],
+
+  steps: [
+    { t:{zh:'报价与确认',en:'Quotation'}, d:{zh:'确认设计范围、数量和交期，我们出正式报价单，并在报价单上写明签约主体。',en:'We confirm the scope, quantity and lead time, then issue a quotation stating which entity will sign.'} },
+    { t:{zh:'签署合同',en:'Contract'}, d:{zh:'境内业务与中山墨方签约，境外业务与 HK SOE 签约。合同里写明币种、付款比例和交期。',en:'Mainland business is contracted with Zhongshan Mofang, overseas business with HK SOE. Currency, payment schedule and lead time are written into the contract.'} },
+    { t:{zh:'通过 ANT INTERNATIONAL 付款',en:'Pay through ANT INTERNATIONAL'}, d:{zh:'卡和钱包在收银台直接付款。',en:'Card and wallet payments are made directly on the checkout page.'} },
+    { t:{zh:'商品发货或项目启动',en:'Delivery or project kick-off'}, d:{zh:'收到款项后我们通过邮寄或邮件发确认回执，发票随商品交付提供。',en:'Once payment is received, we send a confirmation receipt by post or email, and the invoice is provided with the goods on delivery.'} }
+  ],
+
+  methods: [
+    {
+      id:'card',
+      t:{zh:'国际银行卡',en:'International cards'},
+      d:{zh:'Visa、Mastercard、American Express 等主流卡组织，由收单方完成 3-D Secure 银行验证。',en:'Visa, Mastercard, American Express and other major schemes, with 3-D Secure verification handled by the acquirer.'},
+      tags:{zh:['Visa','Mastercard','Amex','3-D Secure'],en:['Visa','Mastercard','Amex','3-D Secure']}
+    },
+    {
+      id:'wallet',
+      t:{zh:'本地电子钱包',en:'Local e-wallets'},
+      d:{zh:'ANT INTERNATIONAL 覆盖地区的本地钱包，比如 Alipay+ 网络里的钱包，按付款人所在地显示。',en:'Local wallets in regions covered by ANT INTERNATIONAL, such as wallets in the Alipay+ network, shown according to the payer location.'},
+      tags:{zh:['Alipay+ 网络','地区钱包','当地币种'],en:['Alipay+ network','Local wallets','Local currency']}
+    },
+    {
+      id:'tt',
+      t:{zh:'银行电汇 T/T',en:'Bank transfer (T/T)'},
+      d:{zh:'适合金额较大、或者需要走内部采购流程的订单。账户信息随 HK SOE 的形式发票一起提供。',en:'For larger orders or when an internal procurement process is required. Bank details are provided with the HK SOE proforma invoice.'},
+      tags:{zh:['大额订单','对公账户','备注发票号'],en:['Larger orders','Corporate account','Quote invoice no.']}
+    }
+  ],
+
+  secure: [
+    { t:{zh:'本页不收集卡号',en:'No card fields here'}, d:{zh:'官网页面上没有支付表单，卡号只在收银台的页面里输入。',en:'There is no payment form on the website. Card numbers are entered on the checkout page only.'} },
+    { t:{zh:'收银台用独立子域名',en:'Separate subdomain'}, d:{zh:'收银台和官网域名分开，减少被仿冒的机会。',en:'The checkout sits on its own subdomain, apart from the main site, which makes spoofing harder.'} },
+    { t:{zh:'全程 HTTPS',en:'HTTPS throughout'}, d:{zh:'付款页面全程加密传输，付款前可以核对地址栏的域名和锁标识。',en:'Traffic to the checkout is encrypted. Check the domain and the lock icon in the address bar before paying.'} },
+    { t:{zh:'交易由收单方风控',en:'Risk checks by the acquirer'}, d:{zh:'交易风险和合规筛查由收单方完成，异常订单会转人工复核。',en:'Risk and compliance screening is done by the acquirer. Flagged orders go to manual review.'} }
+  ],
+
+  faq: [
+    {
+      q:{zh:'为什么境外订单由 HK SOE 收款？',en:'Why are overseas orders paid to HK SOE?'},
+      a:{zh:'中山墨方是境内公司，跨境服务的收付款涉及外汇和税务处理。所以境外业务放在香港主体 HK SOE 名下，由它签约、开票和收款。产品的设计和制作仍由墨方团队完成，售后也由墨方负责。',
+         en:'Zhongshan Mofang is a mainland company, and paying for cross-border services involves foreign exchange and tax handling. Overseas business is therefore placed under the Hong Kong entity HK SOE, which signs, invoices and collects. Design and production are still done by the Mofang team, and after-sales stays with Mofang.'}
+    },
+    {
+      q:{zh:'能开中国增值税发票吗？',en:'Can I get a Chinese VAT invoice?'},
+      a:{zh:'与 HK SOE 签约的订单开具 Commercial Invoice（商业发票），<strong>不能开中国增值税发票</strong>。如果必须取得增值税发票，请以境内主体签约，付到中山墨方的对公账户。',
+         en:'Orders contracted with HK SOE are invoiced as a Commercial Invoice; <strong>a Chinese VAT invoice is not available</strong>. If you need one, contract with the mainland entity and pay to the Zhongshan Mofang corporate account.'}
+    },
+    {
+      q:{zh:'可以用人民币付款吗？',en:'Can I pay in CNY?'},
+      a:{zh:'线上付款的金额和币种以收银台页面为准；走电汇的，以形式发票和合同为准。如果需要用人民币结算，签约前先和项目对接人确认，不要直接按收银台默认的币种付款。',
+         en:'For online payments the amount and currency are shown on the checkout page; for bank transfer they follow the proforma invoice and the contract. If you need CNY settlement, confirm with your project contact before signing rather than assuming the default currency on the checkout.'}
+    },
+    {
+      q:{zh:'付款后多久确认到账？',en:'How long until the payment is confirmed?'},
+      a:{zh:'卡和钱包支付的授权结果会在收银台页面直接显示。跨境结算入账时间取决于收单机构的清算周期。我们收到结算通知后会发确认邮件，需要加急排期的话，邮件里附上发票号。',
+         en:'Card and wallet authorisations show up on the checkout page right away. Cross-border settlement timing depends on the acquirer clearing cycle. We send a confirmation email once settlement is notified; include your invoice number if the schedule needs to be expedited.'}
+    },
+    {
+      q:{zh:'退款怎么处理？',en:'How are refunds handled?'},
+      a:{zh:'退款由 HK SOE 发起，退回原来的付款方式，到账时间取决于发卡行或钱包方。跨境退款可能产生汇兑差额，以合同条款为准。',
+         en:'Refunds are initiated by HK SOE and returned to the original payment method. Timing depends on the issuing bank or wallet provider. Cross-border refunds may involve an exchange difference, subject to the contract terms.'}
+    },
+    {
+      q:{zh:'付款失败或者重复扣款怎么办？',en:'What if the payment fails or is charged twice?'},
+      a:{zh:'先在收银台页面重试，不要重复创建新订单。如果已经重复扣款，把发票号、付款时间和截图发到 mofangtech@qq.com，我们核对后把多扣的部分原路退回。',
+         en:'Retry on the checkout page first rather than creating a new order. If you were charged twice, send the invoice number, payment time and a screenshot to mofangtech@qq.com. We will check it and refund the duplicate to the original method.'}
+    }
+  ]
+};
+
+const t = (o) => (o && (o[LANG] || o.zh)) || '';
+
+/* ============ 渲染：主体判定 ============ */
+let activeEntity = 0;
+function renderTabs(){
+  const box = document.getElementById('tabs');
+  box.innerHTML = T.entities.map((e,i)=>`
+    <button class="tab ${i===activeEntity?'on':''}" type="button" role="tab" data-i="${i}">
+      <span class="dot"></span>${t(e.tab)}
+    </button>`).join('');
+  box.querySelectorAll('.tab').forEach(b=>{
+    b.onclick = () => { activeEntity = +b.dataset.i; renderTabs(); renderPanel(); };
+  });
+}
+function renderPanel(){
+  const e = T.entities[activeEntity];
+  const rows = e.rows.map((r,i)=>`
+    <div class="prow" style="animation-delay:${i*45}ms">
+      <div class="prow__k">${t(r.k)}</div>
+      <div class="prow__v">${t(r.v)}${r.sub?`<em>${t(r.sub)}</em>`:''}</div>
+    </div>`).join('');
+  document.getElementById('panel').innerHTML = rows + `
+    <div class="pnote">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span>${t(e.note)}</span>
+    </div>`;
+}
+
+/* ============ 渲染：四步 ============ */
+let activeStep = 2;
+function renderSteps(){
+  document.getElementById('steps').innerHTML = T.steps.map((s,i)=>`
+    <button class="step ${i===Math.min(activeStep,3)?'on':''}" type="button" data-i="${i}">
+      <span class="step__n">0${i+1}</span>
+      <div class="step__t">${t(s.t)}</div>
+      <div class="step__d">${t(s.d)}</div>
+    </button>`).join('');
+  document.querySelectorAll('.step').forEach(b=>{
+    b.onclick = () => { activeStep = +b.dataset.i; renderSteps(); };
+  });
+}
+
+/* ============ 渲染：付款方式 ============ */
+let activeMethod = 0;
+function renderMethods(){
+  document.getElementById('mgrid').innerHTML = T.methods.map((m,i)=>`
+    <div class="mcard ${i===activeMethod?'sel':''}" data-i="${i}" tabindex="0">
+      <div class="mcard__check">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <div class="mcard__ico">${methodIcon(m.id)}</div>
+      <div class="mcard__t">${t(m.t)}</div>
+      <div class="mcard__d">${t(m.d)}</div>
+      <div class="mcard__meta">${t(m.tags).map(x=>`<span class="mtag">${x}</span>`).join('')}</div>
+    </div>`).join('');
+  document.querySelectorAll('.mcard').forEach(c=>{
+    const pick = () => { activeMethod = +c.dataset.i; renderMethods(); };
+    c.onclick = pick;
+    c.onkeydown = (ev) => { if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); pick(); } };
+  });
+}
+function methodIcon(id){
+  const s = 'width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
+  if(id==='card') return `<svg ${s} viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>`;
+  if(id==='wallet') return `<svg ${s} viewBox="0 0 24 24"><path d="M20 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h15a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6"/><path d="M17 13h.01"/></svg>`;
+  return `<svg ${s} viewBox="0 0 24 24"><path d="M3 21h18M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>`;
+}
+
+/* ============ 渲染：安全 ============ */
+function renderSecure(){
+  const ic = [
+    `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+    `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18"/></svg>`,
+    `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>`,
+    `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.3 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg>`
+  ];
+  document.getElementById('sgrid').innerHTML = T.secure.map((s,i)=>`
+    <div class="scard">
+      <div class="scard__ico">${ic[i]||''}</div>
+      <div class="scard__t">${t(s.t)}</div>
+      <div class="scard__d">${t(s.d)}</div>
+    </div>`).join('');
+}
+
+/* ============ 渲染：FAQ ============ */
+function renderFaq(){
+  document.getElementById('faq').innerHTML = T.faq.map((f,i)=>`
+    <div class="qa ${i===0?'open':''}">
+      <button class="qa__q" type="button">
+        <span>${t(f.q)}</span>
+        <span class="qa__ico">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+      </button>
+      <div class="qa__a"><p>${t(f.a)}</p></div>
+    </div>`).join('');
+  document.querySelectorAll('.qa__q').forEach(btn=>{
+    btn.onclick = () => {
+      const qa = btn.parentElement;
+      const isOpen = qa.classList.contains('open');
+      document.querySelectorAll('.qa').forEach(x=>{x.classList.remove('open');x.querySelector('.qa__a').style.maxHeight='0px';});
+      if(!isOpen){ qa.classList.add('open'); const a=qa.querySelector('.qa__a'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    };
+  });
+  const first = document.querySelector('.qa.open .qa__a');
+  if(first) first.style.maxHeight = first.scrollHeight + 'px';
+}
+
+/* ============ 语言切换 ============ */
+const staticNodes = [];
+document.querySelectorAll('[data-en]').forEach(el=>{
+  staticNodes.push({ el, zh: el.textContent.trim(), en: el.dataset.en });
+});
+function applyLang(lang){
+  LANG = lang;
+  staticNodes.forEach(n=>{ n.el.textContent = (lang==='en' ? n.en : n.zh); });
+  document.documentElement.lang = lang==='en' ? 'en' : 'zh-CN';
+  document.getElementById('langZh').classList.toggle('on', lang==='zh');
+  document.getElementById('langEn').classList.toggle('on', lang==='en');
+  renderTabs(); renderPanel(); renderSteps(); renderMethods(); renderSecure(); renderFaq();
+  // 切换后重算已展开 FAQ 的高度
+  const open = document.querySelector('.qa.open .qa__a');
+  if(open) open.style.maxHeight = open.scrollHeight + 'px';
+}
+
+/* ============ 跳转弹窗 ============ */
+function openPay(){
+  const m = document.getElementById('payModal');
+  document.getElementById('modalUrl').textContent = CONFIG.payUrl;
+  m.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modalGo').focus();
+}
+function closePay(){
+  document.getElementById('payModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function goPay(){
+  if(!CONFIG.payUrlVerified){
+    closePay();
+    toast(LANG==='en'
+      ? 'Checkout URL not configured yet — set CONFIG.payUrl & payUrlVerified in the page source.'
+      : '付款子域名尚未配置：请在页面 CONFIG 中填写 payUrl 并将 payUrlVerified 置为 true。');
+    return;
+  }
+  window.location.href = CONFIG.payUrl;
+}
+function copyPayUrl(){
+  const txt = CONFIG.payUrl;
+  const done = () => toast(LANG==='en' ? 'Checkout link copied' : '收银台链接已复制');
+  if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(txt).then(done).catch(()=>fallback()); }
+  else fallback();
+  function fallback(){
+    const ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ toast(txt); }
+    document.body.removeChild(ta);
+  }
+}
+document.getElementById('modalGo').onclick = goPay;
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closePay(); document.getElementById('floatPanel').classList.remove('open'); } });
+
+/* ============ toast ============ */
+let toastTimer;
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove('show'), 3600);
+}
+
+/* ============ 交互杂项 ============ */
+// 导航滚动态
+const nav = document.getElementById('nav');
+const progress = document.getElementById('progress');
+function onScroll(){
+  const y = window.scrollY;
+  nav.classList.toggle('solid', y > 20);
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+onScroll();
+
+// 移动端抽屉
+document.getElementById('burger').onclick = () => document.getElementById('drawer').classList.toggle('open');
+
+// 悬浮咨询
+document.getElementById('floatBtn').onclick = () => document.getElementById('floatPanel').classList.toggle('open');
+
+// 滚动揭示
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+  });
+},{ threshold:.12, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// 语言按钮
+document.getElementById('langZh').onclick = ()=>applyLang('zh');
+document.getElementById('langEn').onclick = ()=>applyLang('en');
+
+// 初始渲染
+renderTabs(); renderPanel(); renderSteps(); renderMethods(); renderSecure(); renderFaq();
+document.getElementById('payUrlText').textContent = CONFIG.payUrl.replace(/^https?:\/\//,'');
+</script>
+</body>
+</html>

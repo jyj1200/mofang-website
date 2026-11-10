@@ -47,6 +47,16 @@ export function Navigation() {
                 {item.label}
               </Link>
             ))}
+            <a
+              href="/payment"
+              className={`transition-colors ${
+                location.pathname === '/payment'
+                  ? 'text-[#0066CC]'
+                  : 'text-[#2C2C2C] hover:text-[#0066CC]'
+              }`}
+            >
+              {t.nav.payment}
+            </a>
             {/* Language Toggle Button */}
             <button
               onClick={toggleLanguage}
@@ -84,6 +94,17 @@ export function Navigation() {
                 {item.label}
               </Link>
             ))}
+            <a
+              href="/payment"
+              onClick={() => setIsOpen(false)}
+              className={`block px-4 py-2 rounded-md transition-colors ${
+                location.pathname === '/payment'
+                  ? 'bg-[#0066CC] text-white'
+                  : 'text-[#2C2C2C] hover:bg-[#F5F5F7]'
+              }`}
+            >
+              {t.nav.payment}
+            </a>
             {/* Mobile Language Toggle */}
             <button
               onClick={() => {

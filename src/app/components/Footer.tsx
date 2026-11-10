@@ -43,6 +43,11 @@ export function Footer() {
                   {t.nav.team}
                 </Link>
               </li>
+              <li>
+                <a href="/payment" className="text-gray-400 hover:text-[#0066CC] text-sm transition-colors">
+                  {t.nav.payment}
+                </a>
+              </li>
             </ul>
           </div>
 
