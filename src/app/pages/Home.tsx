@@ -61,9 +61,9 @@ export function Home() {
   return (
     <div className="min-h-screen">
       <SEOHead 
-        title="墨方智能科技 - 工业设计与文创产品设计专家"
-        description="中山市墨方智能科技有限公司，以科研人员为核心的工业设计与文创产品设计机构，提供机械设计、机电设计、外观设计与文创产品设计制作一体化服务。"
-        keywords="工业设计,文创产品,机械设计,机电设计,外观设计,中山,墨方智能科技"
+        title="Mofang Tech 墨方智能科技 - 工业设计与文创产品设计专家"
+        description="Mofang Tech（中山市墨方智能科技有限公司）是以科研人员为核心的工业设计与文创产品设计机构，提供机械设计、机电设计、外观设计与文创产品制作一体化服务。Industrial design & cultural creative studio in Zhongshan, China."
+        keywords="Mofang Tech,工业设计,文创产品,机械设计,机电设计,外观设计,中山,墨方智能科技"
         path="/"
       />
       

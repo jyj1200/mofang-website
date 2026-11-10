@@ -8,9 +8,9 @@ interface SEOHeadProps {
 }
 
 export function SEOHead({ 
-  title = '墨方智能科技 - 工业设计与文创产品设计专家',
-  description = '中山市墨方智能科技有限公司，以科研人员为核心的工业设计与文创产品设计机构，提供机械设计、机电设计、外观设计与文创产品设计制作一体化服务。',
-  keywords = '工业设计,文创产品,机械设计,机电设计,外观设计,中山,墨方智能科技',
+  title = 'Mofang Tech 墨方智能科技 - 工业设计与文创产品设计专家',
+  description = 'Mofang Tech（中山市墨方智能科技有限公司）是以科研人员为核心的工业设计与文创产品设计机构，提供机械设计、机电设计、外观设计与文创产品制作一体化服务。Industrial design & cultural creative studio in Zhongshan, China.',
+  keywords = 'Mofang Tech,工业设计,文创产品,机械设计,机电设计,外观设计,中山,墨方智能科技',
   path = ''
 }: SEOHeadProps) {
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
@@ -22,7 +22,7 @@ export function SEOHead({
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      <meta name="author" content="墨方智能科技" />
+      <meta name="author" content="Mofang Tech 墨方智能科技" />
       
       {/* Canonical URL */}
       {path && <link rel="canonical" href={canonicalUrl} />}
@@ -32,7 +32,7 @@ export function SEOHead({
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       {path && <meta property="og:url" content={canonicalUrl} />}
-      <meta property="og:site_name" content="墨方智能科技" />
+      <meta property="og:site_name" content="Mofang Tech 墨方智能科技" />
       
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
